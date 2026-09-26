@@ -20,7 +20,7 @@ jobs:
           node-version: 20
       - run: npm install
       - name: Set Pages base path
-        run: echo "VITE_BASE_PATH=/${GITHUB_REPOSITORY#*/}/" >> "$GITHUB_ENV"
+        run: echo "VITE_BASE_PATH=/" >> "$GITHUB_ENV"
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
