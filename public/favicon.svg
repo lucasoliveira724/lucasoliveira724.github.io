@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="LO">
+  <rect width="64" height="64" rx="13" fill="#f7f9fc"/>
+  <text x="4" y="45" textLength="47" lengthAdjust="spacingAndGlyphs" fill="#172033" font-family="Manrope, Inter, Arial, sans-serif" font-size="35" font-weight="800" letter-spacing="-1.5">LO</text>
+  <circle cx="56" cy="42" r="2.5" fill="#147ca6"/>
+</svg>
