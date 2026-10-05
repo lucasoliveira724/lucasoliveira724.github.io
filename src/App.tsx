@@ -144,8 +144,9 @@ function ProjectShowcase({ project, reverse }: { project: Project; reverse?: boo
           ))}
         </div>
         {project.github ? (
-          <External className="text-link" href={project.github}>
-            Ver no GitHub <ArrowUpRight size={16} />
+          <External className="project-github-button" href={project.github}>
+            <Github size={15} aria-hidden="true" />
+            <span>VER PROJETO</span>
           </External>
         ) : (
           <span className="muted-note">Link do repositório a configurar</span>

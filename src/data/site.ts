@@ -3,6 +3,10 @@ import clickListagem from '../assets/projects/click-imoveis/site/listagem-imovei
 import clickDetalhe from '../assets/projects/click-imoveis/site/detalhe-imovel.png'
 import clickAdmin from '../assets/projects/click-imoveis/site/painel-admin.png'
 import clickAppHome from '../assets/projects/click-imoveis/app/home.jpeg'
+import sandroCapa from '../assets/projects/sandro-car/capa-sandro.png'
+import sandroServicos from '../assets/projects/sandro-car/servicos-sandro.png'
+import sandroMarcas from '../assets/projects/sandro-car/marcas-sandro.png'
+import sandroContato from '../assets/projects/sandro-car/contato-footer-sandro.png'
 import fertilHome from '../assets/projects/fertil-agricola/site/home.png'
 import fertilProdutos from '../assets/projects/fertil-agricola/site/produtos.png'
 import fertilDetalhes from '../assets/projects/fertil-agricola/site/detalhes.png'
@@ -18,7 +22,7 @@ export const links = {
 }
 
 export type ProjectSlide = { label: string; subtitle: string; tone: string; image?: string }
-export type Project = { visible: boolean; name: string; category: string; description: string; technologies: string[]; github: string; slides: ProjectSlide[] }
+export type Project = { visible: boolean; name: string; category: string; description: string; technologies: string[]; github: string; githubLabel?: string; slides: ProjectSlide[] }
 
 export const projects: Project[] = [
   {
@@ -30,6 +34,17 @@ export const projects: Project[] = [
       { label: 'Detalhes', subtitle: 'Detalhes do imóvel', tone: 'slate', image: clickDetalhe },
       { label: 'Admin', subtitle: 'Painel Administrativo', tone: 'aqua', image: clickAdmin },
       { label: 'Mobile', subtitle: 'Aplicativo Mobile', tone: 'blue', image: clickAppHome },
+    ],
+  },
+  {
+    visible: true, name: 'Sandro Car', category: 'Web Development',
+    description: 'Site institucional desenvolvido para uma empresa do segmento automotivo, com foco na apresentação de serviços, marcas atendidas e canais de contato por meio de uma interface moderna, clara e organizada.',
+    technologies: ['React', 'JavaScript', 'CSS', 'Vite'], github: 'https://github.com/lucasoliveira724/sandro-car-showcase', githubLabel: 'Ver Case no GitHub',
+    slides: [
+      { label: 'Capa', subtitle: 'Apresentação do site', tone: 'blue', image: sandroCapa },
+      { label: 'Serviços', subtitle: 'Serviços automotivos', tone: 'sky', image: sandroServicos },
+      { label: 'Marcas', subtitle: 'Marcas atendidas', tone: 'slate', image: sandroMarcas },
+      { label: 'Contato', subtitle: 'Contato e localização', tone: 'aqua', image: sandroContato },
     ],
   },
   {

@@ -683,6 +683,25 @@ button:focus-visible {
 .text-link:hover {
   gap: 12px;
 }
+.project-github-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 13px;
+  border-radius: 5px;
+  background: #172033;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.project-github-button:hover {
+  background: #24334f;
+  box-shadow: 0 6px 14px #1720331a;
+  transform: translateY(-1px);
+}
 .muted-note {
   font: 9px 'DM Mono';
   color: #96a1af;
