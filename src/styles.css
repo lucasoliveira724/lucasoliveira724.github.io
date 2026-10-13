@@ -471,6 +471,7 @@ button:focus-visible {
 }
 .carousel {
   min-width: 0;
+  position: relative;
 }
 .mock-screen {
   height: 315px;
@@ -601,10 +602,7 @@ button:focus-visible {
   color: #819097;
 }
 .carousel-controls {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin-top: 17px;
+  display: none;
 }
 .carousel-controls > button {
   width: 32px;
@@ -646,11 +644,42 @@ button:focus-visible {
   color: #79869a;
 }
 .slide-label {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  font: 9px 'DM Mono';
-  color: #8390a0;
+  display: none;
+}
+.carousel-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid #ffffff75;
+  border-radius: 50%;
+  background: #10243c82;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.82;
+  backdrop-filter: blur(5px);
+  transition: background-color 180ms ease, opacity 180ms ease, transform 180ms ease;
+}
+.carousel-arrow:hover {
+  transform: translateY(-50%) scale(1.06);
+  background: #10243cbd;
+  opacity: 1;
+}
+.carousel-arrow:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  opacity: 1;
+}
+.carousel-arrow-prev {
+  left: 14px;
+}
+.carousel-arrow-next {
+  right: 14px;
 }
 .project-info .eyebrow {
   font-size: 9px;
@@ -1112,8 +1141,13 @@ button:focus-visible {
     order: initial;
   }
   .mock-screen {
-    height: 250px;
+    height: auto;
+    min-height: 200px;
+    aspect-ratio: 1672 / 941;
     padding-inline: 15px;
+  }
+  .mock-screen.has-screenshot {
+    min-height: 0;
   }
   .mock-copy {
     left: 15px;
@@ -1129,8 +1163,15 @@ button:focus-visible {
   .tags {
     margin: 14px 0 17px;
   }
-  .slide-label {
-    font-size: 8px;
+  .carousel-arrow {
+    width: 34px;
+    height: 34px;
+  }
+  .carousel-arrow-prev {
+    left: 9px;
+  }
+  .carousel-arrow-next {
+    right: 9px;
   }
   .sf-groups {
     grid-template-columns: 1fr;
@@ -1229,7 +1270,12 @@ button:focus-visible {
 }
 .mock-screen.has-screenshot {
   padding: 0;
-  background: #fff;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  height: auto;
+  aspect-ratio: 1672 / 941;
 }
 .project-screenshot {
   display: block;
@@ -1237,7 +1283,8 @@ button:focus-visible {
   height: 100%;
   object-fit: contain;
   object-position: center;
-  background: #fff;
+  border-radius: inherit;
+  background: transparent;
 }
 .contact-action{color:var(--blue);font-weight:700}.footer-social svg{height:15px}
 .case-card{display:block;color:inherit;text-decoration:none}.case-card>.case-action{justify-content:flex-start;align-items:center;gap:4px;margin-top:14px;color:var(--blue);font:700 9px Manrope,Inter,system-ui,sans-serif}.case-card>.case-action svg{width:12px;height:12px}

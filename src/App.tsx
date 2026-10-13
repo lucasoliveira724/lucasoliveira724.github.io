@@ -98,35 +98,21 @@ function ProjectCarousel({ project }: { project: Project }) {
             <span className="placeholder-tag">Imagem ilustrativa</span>
           </>
         )}
-      </div>{' '}
-      <div className="carousel-controls">
-        <button aria-label="Imagem anterior" onClick={() => move(-1)}>
-          <ArrowLeft size={17} />
-        </button>
-        <div className="dots" role="group" aria-label="Escolher imagem">
-          {project.slides.map((s, i) => (
-            <button
-              key={s.label}
-              className={i === index ? 'active' : ''}
-              aria-label={`Imagem ${i + 1}: ${s.label}`}
-              aria-current={i === index ? 'true' : undefined}
-              onClick={() => setIndex(i)}
-            />
-          ))}
-        </div>
-        <span className="slide-count">
-          {String(index + 1).padStart(2, '0')} / {project.slides.length}
-        </span>
-        <button aria-label="Próxima imagem" onClick={() => move(1)}>
-          <ArrowRight size={17} />
-        </button>
       </div>
-      <div className="slide-label">
-        <span>
-          {String(index + 1).padStart(2, '0')} / {slide.label}
-        </span>
-        <span>Use as setas ou arraste</span>
-      </div>
+      <button
+        className="carousel-arrow carousel-arrow-prev"
+        aria-label="Imagem anterior"
+        onClick={() => move(-1)}
+      >
+        <ArrowLeft size={18} />
+      </button>
+      <button
+        className="carousel-arrow carousel-arrow-next"
+        aria-label="Próxima imagem"
+        onClick={() => move(1)}
+      >
+        <ArrowRight size={18} />
+      </button>
     </div>
   )
 }
@@ -148,9 +134,7 @@ function ProjectShowcase({ project, reverse }: { project: Project; reverse?: boo
             <Github size={15} aria-hidden="true" />
             <span>VER PROJETO</span>
           </External>
-        ) : (
-          <span className="muted-note">Link do repositório a configurar</span>
-        )}
+        ) : null}
       </div>
     </article>
   )

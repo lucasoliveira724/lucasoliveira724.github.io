@@ -1,12 +1,12 @@
-import clickHome from '../assets/projects/click-imoveis/site/home.png'
-import clickListagem from '../assets/projects/click-imoveis/site/listagem-imoveis.png'
-import clickDetalhe from '../assets/projects/click-imoveis/site/detalhe-imovel.png'
-import clickAdmin from '../assets/projects/click-imoveis/site/painel-admin.png'
-import clickAppHome from '../assets/projects/click-imoveis/app/home.jpeg'
-import sandroCapa from '../assets/projects/sandro-car/capa-sandro.png'
-import sandroServicos from '../assets/projects/sandro-car/servicos-sandro.png'
-import sandroMarcas from '../assets/projects/sandro-car/marcas-sandro.png'
-import sandroContato from '../assets/projects/sandro-car/contato-footer-sandro.png'
+import clickSiteShowcase from '../assets/projects/click-imoveis/showcase/site-showcase.webp'
+import clickAdminShowcase from '../assets/projects/click-imoveis/showcase/admin-showcase.webp'
+import clickAppShowcase from '../assets/projects/click-imoveis/showcase/app-showcase.webp'
+import sandroHomeShowcase from '../assets/projects/sandro-car/showcase/home-showcase.webp'
+import sandroServicosShowcase from '../assets/projects/sandro-car/showcase/servicos-showcase.webp'
+import sandroContatoShowcase from '../assets/projects/sandro-car/showcase/contato-showcase.webp'
+import gPrimeCardapio from '../assets/projects/g-prime-grill/showcase/cardapio-showcase.webp'
+import gPrimePainel from '../assets/projects/g-prime-grill/showcase/painel-showcase.webp'
+import gPrimeWhatsapp from '../assets/projects/g-prime-grill/showcase/whatsapp-showcase.webp'
 import fertilHome from '../assets/projects/fertil-agricola/site/home.png'
 import fertilProdutos from '../assets/projects/fertil-agricola/site/produtos.png'
 import fertilDetalhes from '../assets/projects/fertil-agricola/site/detalhes.png'
@@ -22,18 +22,16 @@ export const links = {
 }
 
 export type ProjectSlide = { label: string; subtitle: string; tone: string; image?: string }
-export type Project = { visible: boolean; name: string; category: string; description: string; technologies: string[]; github: string; githubLabel?: string; slides: ProjectSlide[] }
+export type Project = { visible: boolean; name: string; category: string; description: string; technologies: string[]; github?: string; githubLabel?: string; slides: ProjectSlide[] }
 
 export const projects: Project[] = [
   {
     visible: true, name: 'Click Imóveis', category: 'Plataforma Web & Mobile',
     description:'Ecossistema digital para o mercado imobiliário, composto por plataforma web, painel administrativo e aplicativo mobile. A solução centraliza a apresentação e o gerenciamento de imóveis, oferecendo busca e visualização de propriedades, favoritos e canais de contato em uma experiência integrada entre web e mobile.',    technologies: ['Next.js', 'React Native', 'Firebase', 'Expo'], github: 'https://github.com/lucasoliveira724/click-imoveis-showcase',
     slides: [
-      { label: 'Home', subtitle: 'Plataforma Web', tone: 'blue', image: clickHome },
-      { label: 'Imóveis', subtitle: 'Listagem de imóveis', tone: 'sky', image: clickListagem },
-      { label: 'Detalhes', subtitle: 'Detalhes do imóvel', tone: 'slate', image: clickDetalhe },
-      { label: 'Admin', subtitle: 'Painel Administrativo', tone: 'aqua', image: clickAdmin },
-      { label: 'Mobile', subtitle: 'Aplicativo Mobile', tone: 'blue', image: clickAppHome },
+      { label: 'Site', subtitle: 'Plataforma imobiliária', tone: 'blue', image: clickSiteShowcase },
+      { label: 'Gestão', subtitle: 'Painel administrativo', tone: 'sky', image: clickAdminShowcase },
+      { label: 'App', subtitle: 'Aplicativo Click Imóveis', tone: 'aqua', image: clickAppShowcase },
     ],
   },
   {
@@ -41,10 +39,19 @@ export const projects: Project[] = [
     description: 'Site institucional desenvolvido para uma empresa do segmento automotivo, com foco na apresentação de serviços, marcas atendidas e canais de contato por meio de uma interface moderna, clara e organizada.',
     technologies: ['React', 'JavaScript', 'CSS', 'Vite'], github: 'https://github.com/lucasoliveira724/sandro-car-showcase', githubLabel: 'Ver Case no GitHub',
     slides: [
-      { label: 'Capa', subtitle: 'Apresentação do site', tone: 'blue', image: sandroCapa },
-      { label: 'Serviços', subtitle: 'Serviços automotivos', tone: 'sky', image: sandroServicos },
-      { label: 'Marcas', subtitle: 'Marcas atendidas', tone: 'slate', image: sandroMarcas },
-      { label: 'Contato', subtitle: 'Contato e localização', tone: 'aqua', image: sandroContato },
+      { label: 'Home', subtitle: 'Site institucional responsivo', tone: 'blue', image: sandroHomeShowcase },
+      { label: 'Serviços', subtitle: 'Serviços e marcas atendidas', tone: 'sky', image: sandroServicosShowcase },
+      { label: 'Contato', subtitle: 'Localização e canais de contato', tone: 'aqua', image: sandroContatoShowcase },
+    ],
+  },
+  {
+    visible: true, name: 'G Prime Grill', category: 'Cardápio digital',
+    description: 'Cardápio digital responsivo com painel administrativo para organizar produtos, categorias, condomínios e eventos. O fluxo de pedidos reúne as informações do cliente e do carrinho para envio pelo WhatsApp.',
+    technologies: ['React', 'TypeScript', 'Vite', 'Firebase'],
+    slides: [
+      { label: 'Cardápio', subtitle: 'Cardápio digital responsivo', tone: 'blue', image: gPrimeCardapio },
+      { label: 'Painel', subtitle: 'Painel administrativo', tone: 'slate', image: gPrimePainel },
+      { label: 'WhatsApp', subtitle: 'Pedido organizado pelo WhatsApp', tone: 'aqua', image: gPrimeWhatsapp },
     ],
   },
   {
