@@ -80,6 +80,54 @@ button:focus-visible {
   padding-left: 25px;
   display: flex;
 }
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px 4px 12px;
+  border-left: 1px solid var(--line);
+  color: #8793a3;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.language-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #647187;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+.language-option[aria-pressed="true"] {
+  color: var(--blue);
+  background: #e8f2f7;
+  box-shadow: inset 0 0 0 1px #d7e8f0;
+}
+.language-option:hover {
+  background: #eef4f7;
+}
+.language-option:focus-visible {
+  outline: 2px solid #48a8d2;
+  outline-offset: 2px;
+}
+.language-flag {
+  display: block;
+  width: 16px;
+  height: 11px;
+  flex: 0 0 16px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.language-divider {
+  color: #b3bdc8;
+  font-size: 10px;
+}
 .mobile-menu {
   display: none;
   border: 0;
@@ -997,6 +1045,20 @@ button:focus-visible {
   .nav-links .nav-github {
     padding: 13px 4px;
     border: 0;
+  }
+  .nav-links > .language-switch {
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 8px 4px 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+  .language-switch {
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 8px 4px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
   }
   .hero {
     padding-top: 64px;
