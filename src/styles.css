@@ -713,6 +713,13 @@ button:focus-visible {
   opacity: 0.68;
   transition: opacity 180ms ease, transform 180ms ease;
 }
+.carousel--navy .carousel-arrow {
+  color: #172033;
+}
+
+.carousel--light .carousel-arrow {
+  color: #F5F7FA;
+}
 .carousel-arrow:hover {
   transform: translateY(-50%) scale(1.06);
   opacity: 1;

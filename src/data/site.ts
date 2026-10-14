@@ -47,7 +47,7 @@ export const projects: Project[] = [
   {
     visible: true, name: 'G Prime Grill', category: 'Cardápio digital',
     description: 'Cardápio digital responsivo com painel administrativo para organizar produtos, categorias, condomínios e eventos. O fluxo de pedidos reúne as informações do cliente e do carrinho para envio pelo WhatsApp.',
-    technologies: ['React', 'TypeScript', 'Vite', 'Firebase'],
+    technologies: ['React', 'TypeScript', 'Vite', 'Firebase'], github: 'https://github.com/lucasoliveira724/g-prime-grill-showcase',
     slides: [
       { label: 'Cardápio', subtitle: 'Cardápio digital responsivo', tone: 'blue', image: gPrimeCardapio },
       { label: 'Painel', subtitle: 'Painel administrativo', tone: 'slate', image: gPrimePainel },

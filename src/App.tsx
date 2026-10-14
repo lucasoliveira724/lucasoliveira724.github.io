@@ -81,7 +81,7 @@ function ProjectCarousel({ project, t }: { project: Project; t: typeof translati
 
   return (
     <div
-      className="carousel"
+      className={`carousel ${project.name === 'Click Imóveis' ? 'carousel--navy' : project.name === 'Sandro Car' || project.name === 'G Prime Grill' ? 'carousel--light' : ''}`}
       aria-roledescription={t.projects.carousel}
       aria-label={t.projects.screenshot.replace('{name}', project.name)}
       onMouseEnter={() => setIsHovered(true)}
@@ -152,14 +152,14 @@ function ProjectCarousel({ project, t }: { project: Project; t: typeof translati
         aria-label={t.projects.previous}
         onClick={() => move(-1)}
       >
-        <ChevronLeft size={32} strokeWidth={1.8} />
+        <ChevronLeft size={40} strokeWidth={1.8} />
       </button>
       <button
         className="carousel-arrow carousel-arrow-next"
         aria-label={t.projects.next}
         onClick={() => move(1)}
       >
-        <ChevronRight size={32} strokeWidth={1.8} />
+        <ChevronRight size={40} strokeWidth={1.8} />
       </button>
     </div>
   )
@@ -181,7 +181,7 @@ function ProjectShowcase({ project, reverse, t }: { project: Project; reverse?: 
         {project.github ? (
           <External className="project-github-button" href={project.github}>
             <Github size={15} aria-hidden="true" />
-            <span>{t.projects.view}</span>
+            <span>{project.name === 'Click Imóveis' || project.name === 'Sandro Car' || project.name === 'G Prime Grill' ? (t === translations.pt ? 'Ver showcase no GitHub' : 'View GitHub Showcase') : t.projects.view}</span>
           </External>
         ) : null}
       </div>
