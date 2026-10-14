@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import {
   ArrowDownRight,
-  ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   Bot,
   Braces,
   Check,
+  ChevronLeft,
+  ChevronRight,
   Cloud,
   Code2,
   Database,
@@ -48,14 +48,57 @@ function WhatsAppIcon() {
 }
 function ProjectCarousel({ project, t }: { project: Project; t: typeof translations.pt | typeof translations.en }) {
   const [index, setIndex] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
+  const [isPageVisible, setIsPageVisible] = useState(() => document.visibilityState === 'visible')
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   const slide = project.slides[index]
-  const move = (step: number) =>
-    setIndex((index + step + project.slides.length) % project.slides.length)
+  const move = (step: number) => setIndex((current) => (current + step + project.slides.length) % project.slides.length)
+
+  useEffect(() => {
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updateMotionPreference = () => setPrefersReducedMotion(motionPreference.matches)
+    const updatePageVisibility = () => setIsPageVisible(document.visibilityState === 'visible')
+
+    updateMotionPreference()
+    motionPreference.addEventListener('change', updateMotionPreference)
+    document.addEventListener('visibilitychange', updatePageVisibility)
+
+    return () => {
+      motionPreference.removeEventListener('change', updateMotionPreference)
+      document.removeEventListener('visibilitychange', updatePageVisibility)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isHovered || isFocused || !isPageVisible || prefersReducedMotion || project.slides.length < 2) return
+
+    const timeout = window.setTimeout(() => {
+      setIndex((current) => (current + 1) % project.slides.length)
+    }, 5000)
+    return () => window.clearTimeout(timeout)
+  }, [index, isHovered, isFocused, isPageVisible, prefersReducedMotion, project.slides.length])
+
   return (
     <div
       className="carousel"
       aria-roledescription={t.projects.carousel}
       aria-label={t.projects.screenshot.replace('{name}', project.name)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocusCapture={() => setIsFocused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsFocused(false)
+      }}
+      onKeyDown={(event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault()
+          move(-1)
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault()
+          move(1)
+        }
+      }}
       onTouchStart={(e) => {
         ;(e.currentTarget as HTMLElement).dataset.touchX = String(e.touches[0].clientX)
       }}
@@ -67,7 +110,7 @@ function ProjectCarousel({ project, t }: { project: Project; t: typeof translati
     >
       <div
         className={`mock-screen ${slide.tone} ${slide.image ? 'has-screenshot' : ''}`}
-        aria-live="polite"
+        aria-live="off"
       >
         {slide.image ? (
           <img
@@ -109,14 +152,14 @@ function ProjectCarousel({ project, t }: { project: Project; t: typeof translati
         aria-label={t.projects.previous}
         onClick={() => move(-1)}
       >
-        <ArrowLeft size={18} />
+        <ChevronLeft size={32} strokeWidth={1.8} />
       </button>
       <button
         className="carousel-arrow carousel-arrow-next"
         aria-label={t.projects.next}
         onClick={() => move(1)}
       >
-        <ArrowRight size={18} />
+        <ChevronRight size={32} strokeWidth={1.8} />
       </button>
     </div>
   )
@@ -217,10 +260,7 @@ function App() {
               <br />
               <span>Oliveira</span>
             </h1>
-            <h2>
-              Salesforce Marketing Cloud
-              <br className="desktop-break" /> Consultant &amp; Developer
-            </h2>
+            <h2>{t.hero.title}</h2>
             <p>
               {t.hero.description}
             </p>
@@ -228,9 +268,9 @@ function App() {
               <a className="button primary" href="#projetos">
                 {t.hero.projects} <ArrowDownRight size={17} />
               </a>
-              <External className="button secondary" href={links.github}>
-                GitHub <Github size={16} />
-              </External>
+              <a className="button secondary" href="#contato">
+                {t.hero.contact} <ArrowUpRight size={16} />
+              </a>
             </div>
             <div className="hero-tech">
               {['Salesforce Marketing Cloud', 'SQL', 'React', 'TypeScript', 'Python', 'AI'].map(
