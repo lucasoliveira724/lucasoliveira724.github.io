@@ -17,7 +17,7 @@ export const links = {
   github: 'https://github.com/lucasoliveira724',
   linkedin: 'https://www.linkedin.com/in/lucas-oliveira-7948b494/',
   email: 'mailto:lucasjoseoliveira724@gmail.com',
-  whatsapp: `https://wa.me/5511999046597?text=${encodeURIComponent('Olá, Lucas! Encontrei seu portfólio e gostaria de conversar sobre um projeto ou oportunidade.')}`,
+  whatsapp: `https://wa.me/5511923629202?text=${encodeURIComponent('Olá, Lucas! Encontrei seu portfólio e gostaria de conversar sobre um projeto ou oportunidade.')}`,
   salesforceCases: 'https://github.com/lucasoliveira724/salesforce-marketing-cloud-cases',
 }
 

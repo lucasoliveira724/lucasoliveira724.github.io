@@ -25,7 +25,7 @@ import { translations, type Language } from './i18n'
 import brazilFlag from './assets/flags/brazil.svg'
 import unitedStatesFlag from './assets/flags/united-states.svg'
 
-const whatsappHref = (language: Language) => `https://wa.me/5511999046597?text=${encodeURIComponent(translations[language].footer.greeting)}`
+const whatsappHref = (language: Language) => `https://wa.me/5511923629202?text=${encodeURIComponent(translations[language].footer.greeting)}`
 
 function External({
   href,
