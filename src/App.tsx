@@ -24,6 +24,8 @@ import { cases, links, projects, type Project } from './data/site'
 import { translations, type Language } from './i18n'
 import brazilFlag from './assets/flags/brazil.svg'
 import unitedStatesFlag from './assets/flags/united-states.svg'
+import AnalyticsConsentBanner from './AnalyticsConsent'
+import { getStoredAnalyticsConsent, setAnalyticsConsent, storeAnalyticsConsent, trackAnalyticsEvent, type AnalyticsConsent } from './analytics'
 
 const whatsappHref = (language: Language) => `https://wa.me/5511923629202?text=${encodeURIComponent(translations[language].footer.greeting)}`
 
@@ -179,7 +181,7 @@ function ProjectShowcase({ project, reverse, t }: { project: Project; reverse?: 
           ))}
         </div>
         {project.github ? (
-          <External className="project-github-button" href={project.github}>
+          <External className="project-github-button" href={project.github} onClick={() => trackAnalyticsEvent('view_project_showcase', { project_name: project.name })}>
             <Github size={15} aria-hidden="true" />
             <span>{project.name === 'Click Imóveis' || project.name === 'Sandro Car' || project.name === 'G Prime Grill' ? (t === translations.pt ? 'Ver showcase no GitHub' : 'View GitHub Showcase') : t.projects.view}</span>
           </External>
@@ -190,6 +192,8 @@ function ProjectShowcase({ project, reverse, t }: { project: Project; reverse?: 
 }
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [analyticsConsent, setAnalyticsConsentState] = useState<AnalyticsConsent>(() => getStoredAnalyticsConsent())
+  const [showAnalyticsConsent, setShowAnalyticsConsent] = useState(() => getStoredAnalyticsConsent() === null)
   const [language, setLanguage] = useState<Language>(() => {
     try {
       return localStorage.getItem('portfolio-language') === 'en' ? 'en' : 'pt'
@@ -206,6 +210,14 @@ function App() {
       // Keep the selected language for this session if browser storage is unavailable.
     }
   }, [language])
+  useEffect(() => {
+    setAnalyticsConsent(analyticsConsent)
+  }, [analyticsConsent])
+  const chooseAnalyticsConsent = (consent: Exclude<AnalyticsConsent, null>) => {
+    storeAnalyticsConsent(consent)
+    setAnalyticsConsentState(consent)
+    setShowAnalyticsConsent(false)
+  }
   const changeLanguage = (next: Language) => setLanguage(next)
   const nav = [
     [t.nav.about, '#sobre'],
@@ -252,8 +264,7 @@ function App() {
         <section className="hero container">
           <div className="hero-content">
             <span className="eyebrow hero-eyebrow">
-              <span className="status-dot" /> Salesforce <b>·</b> {language === 'pt' ? 'Desenvolvimento' : 'Development'} <b>·</b> {language === 'pt' ? 'Automação' : 'Automation'}
-              &amp; {language === 'pt' ? 'IA' : 'AI'}
+              <span className="status-dot" /> Salesforce <b>·</b> {language === 'pt' ? 'Desenvolvimento' : 'Development'} <b>·</b> {language === 'pt' ? 'Automação' : 'Automation'}{' '}&amp;{' '}{language === 'pt' ? 'IA' : 'AI'}
             </span>
             <h1>
               Lucas
@@ -571,7 +582,7 @@ function App() {
             </p>
           </div>
           <div className="contact-cards">
-            <External href={links.linkedin} className="contact-card">
+            <External href={links.linkedin} className="contact-card" onClick={() => trackAnalyticsEvent('contact_linkedin')}>
               <span className="contact-icon">
                 <Linkedin />
               </span>
@@ -601,7 +612,7 @@ function App() {
               </span>
               <ArrowUpRight />
             </a>
-            <External href={whatsappHref(language)} className="contact-card" aria-label={t.contact.whatsappLabel} rel="noopener noreferrer">
+            <External href={whatsappHref(language)} className="contact-card" aria-label={t.contact.whatsappLabel} rel="noopener noreferrer" onClick={() => trackAnalyticsEvent('contact_whatsapp')}>
               <span className="contact-icon">
                 <WhatsAppIcon />
               </span>
@@ -629,10 +640,10 @@ function App() {
             <External href={links.github} aria-label={language === 'pt' ? 'GitHub' : 'GitHub'}>
               <Github />
             </External>
-            <External href={links.linkedin} aria-label={language === 'pt' ? 'LinkedIn' : 'LinkedIn'}>
+            <External href={links.linkedin} aria-label="LinkedIn" onClick={() => trackAnalyticsEvent('contact_linkedin')}>
               <Linkedin />
             </External>
-            <External href={whatsappHref(language)} aria-label={t.nav.whatsapp} rel="noopener noreferrer">
+            <External href={whatsappHref(language)} aria-label={t.nav.whatsapp} rel="noopener noreferrer" onClick={() => trackAnalyticsEvent('contact_whatsapp')}>
               <WhatsAppIcon />
             </External>
           </div>
@@ -640,8 +651,10 @@ function App() {
         <div className="container footer-bottom">
           <span>© 2026 Lucas Oliveira. {t.footer.rights}</span>
           <span>{t.footer.built}</span>
+          <button type="button" className="privacy-settings-button" onClick={() => setShowAnalyticsConsent(true)}>{t.analytics.settings}</button>
         </div>
       </footer>
+      <AnalyticsConsentBanner language={language} open={showAnalyticsConsent} onChoice={chooseAnalyticsConsent} />
     </>
   )
 }
