@@ -7,7 +7,6 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  Cloud,
   Code2,
   Database,
   Github,
@@ -15,13 +14,12 @@ import {
   Mail,
   Menu,
   MessageCircle,
-  Plug,
-  Sparkles,
   Workflow,
   X
 } from 'lucide-react'
 import { cases, links, projects, type Project } from './data/site'
 import { translations, type Language } from './i18n'
+import HeroOrbit from './HeroOrbit'
 import brazilFlag from './assets/flags/brazil.svg'
 import unitedStatesFlag from './assets/flags/united-states.svg'
 import AnalyticsConsentBanner from './AnalyticsConsent'
@@ -291,49 +289,7 @@ function App() {
               )}
             </div>
           </div>
-          <div className="hero-visual" aria-hidden="true">
-            <div className="visual-grid" />
-            <div className="visual-ring ring-a" />
-            <div className="visual-ring ring-b" />
-            <div className="visual-core">
-              <Workflow size={44} />
-              <span>
-                MARKETING
-                <br />× TECHNOLOGY
-              </span>
-            </div>
-            <span className="orbit-path orbit-path-a">
-              <span className="float-chip chip-a">
-                <Database size={15} /> Data
-              </span>
-            </span>
-            <span className="orbit-path orbit-path-b">
-              <span className="float-chip chip-b">
-                <Code2 size={15} /> {language === 'pt' ? 'Desenvolvimento' : 'Development'}
-              </span>
-            </span>
-            <span className="orbit-path orbit-path-c">
-              <span className="float-chip chip-c">
-                <Bot size={15} /> {language === 'pt' ? 'Automação' : 'Automation'}
-              </span>
-            </span>
-            <span className="orbit-path orbit-path-d">
-              <span className="float-chip chip-d">
-                <Cloud size={15} /> Salesforce
-              </span>
-            </span>
-            <span className="orbit-path orbit-path-e">
-              <span className="float-chip chip-e">
-                <Sparkles size={15} /> AI
-              </span>
-            </span>
-            <span className="orbit-path orbit-path-f">
-              <span className="float-chip chip-f">
-                <Plug size={15} /> APIs
-              </span>
-            </span>
-            <span className="visual-index">01 — 06</span>
-          </div>
+          <HeroOrbit language={language} />
           <div className="hero-foot">
             <span>{t.hero.tagline}</span>
             <a href="#sobre" aria-label={t.nav.about}>
